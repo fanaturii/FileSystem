@@ -152,12 +152,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AbstractClassFS.h" />
+    <ClInclude Include="ExFAT_FS.h" />
+    <ClInclude Include="FAT32_FS.h" />
+    <ClInclude Include="FileSystemChecker.h" />
     <ClInclude Include="NTFS_FS.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractClassFS.cpp" />
+    <ClCompile Include="ExFAT_FS.cpp" />
+    <ClCompile Include="FAT32_FS.cpp" />
     <ClCompile Include="FileSystem.cpp" />
+    <ClCompile Include="FileSystemChecker.cpp" />
     <ClCompile Include="NTFS_FS.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

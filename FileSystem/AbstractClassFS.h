@@ -15,14 +15,10 @@ protected:
 public:
 	AbstractClassFS();
 	~AbstractClassFS();
-	bool Open();
-	void GetFirstSector(BYTE * bufferFirst);
-	virtual void SetParameters(BYTE * bufferParameters) = 0;
-	virtual bool CheckFileSystem(BYTE * bufferCheck) = 0;
 	BYTE *GetOEMName();
 	DWORD GetBytesPerCluster() const;
 	DWORD GetTotalClusters() const;
-	bool ReadClusters(ULONGLONG startCluster, DWORD numberOfClusters, BYTE *outBuffer);
+	virtual bool ReadClusters(ULONGLONG startCluster, DWORD numberOfClusters, BYTE *outBuffer) = 0;
 	void Close();
 };
 

@@ -4,8 +4,15 @@
 #include <iostream>
 
 
-NTFS_FS::NTFS_FS()
+NTFS_FS::NTFS_FS(BYTE * parameters, HANDLE fileHandle)
 {
+	NTFS_BootRecord * bootRecord = (NTFS_BootRecord*)parameters;
+	memcpy(OEMName, bootRecord->OEM_Name, sizeof(OEMName));
+	BytesPerSector = *((WORD*)bootRecord->SectorSize);
+	SectorsPerCluster = bootRecord->SectorsInCluster;
+	BytesPerCluster = SectorsPerCluster * BytesPerSector;
+	TotalClusters = bootRecord->SectorCount / SectorsPerCluster;
+	FileHandle = fileHandle;
 }
 
 
@@ -13,31 +20,48 @@ NTFS_FS::~NTFS_FS()
 {
 }
 
-void NTFS_FS::SetParameters(BYTE * bufferParameters)
+bool NTFS_FS::ReadClusters(ULONGLONG startCluster, DWORD numberOfClusters, BYTE * outBuffer)
 {
-	NTFS_BootRecord * bootRecord = (NTFS_BootRecord*)bufferParameters;
-	memcpy(OEMName,bootRecord->OEM_Name,sizeof(OEMName));
-	BytesPerSector = *((WORD*)bootRecord->SectorSize);
-	SectorsPerCluster = bootRecord->SectorsInCluster;
-	BytesPerCluster = SectorsPerCluster * BytesPerSector;
-	TotalClusters = bootRecord->SectorCount / SectorsPerCluster;
+	LARGE_INTEGER clusterOffset;
+	DWORD bytesToRead;
+	DWORD bytesRead;
+	clusterOffset.QuadPart = startCluster * BytesPerCluster;
+	bytesToRead = numberOfClusters * BytesPerCluster;
+	unsigned long currentPosition = SetFilePointer(
+		FileHandle,
+		clusterOffset.LowPart,
+		&clusterOffset.HighPart,
+		FILE_BEGIN
+	);
 
-}
-
-bool NTFS_FS::CheckFileSystem(BYTE * bufferCheck)
-{
-	std::string NTFS_Name = "NTFS";
-	NTFS_BootRecord * bootRecord = (NTFS_BootRecord*)bufferCheck;
-	std::string OEM((char *)bootRecord->OEM_Name, 4);
-	
-
-	if (OEM.compare(NTFS_Name) == 0) {
-		this->SetParameters(bufferCheck);
-		return true;
-	}
-	else {
-		std::cout << "It`s not a NTFS file system!" << std::endl;
-		exit(500);
+	if (currentPosition != clusterOffset.LowPart) {
+		std::cout << "Error: Can`t move pointer!" << std::endl;
+		exit(102);
 		return false;
 	}
+
+	bool readResult = ReadFile(
+		FileHandle,
+		outBuffer,
+		bytesToRead,
+		&bytesRead,
+		NULL
+	);
+
+	if (!readResult || bytesRead != bytesToRead) {
+		std::cout << "Error read bytes!" << std::endl;
+		exit(103);
+		return false;
+	}
+	else {
+		int i = 0;
+		while (i != bytesToRead) {
+			std::cout << std::hex << DWORD(*outBuffer) << " ";
+			outBuffer++;
+			i++;
+		}
+		return true;
+	}
 }
+
+

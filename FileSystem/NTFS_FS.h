@@ -16,10 +16,8 @@ typedef struct
 class NTFS_FS : public AbstractClassFS
 {
 public:
-	NTFS_FS();
+	NTFS_FS(BYTE * parameters, HANDLE fileHandle);
 	~NTFS_FS();
-	virtual void SetParameters(BYTE * bufferParameters);
-	virtual bool CheckFileSystem(BYTE * bufferCheck);
-	
+	virtual bool ReadClusters(ULONGLONG startCluster, DWORD numberOfClusters, BYTE *outBuffer);
 };
 

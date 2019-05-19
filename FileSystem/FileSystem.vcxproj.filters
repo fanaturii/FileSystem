@@ -24,6 +24,15 @@
     <ClInclude Include="NTFS_FS.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="FileSystemChecker.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="FAT32_FS.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ExFAT_FS.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -36,6 +45,15 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="NTFS_FS.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystemChecker.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="FAT32_FS.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ExFAT_FS.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,22 +2,25 @@
 #include <iostream>
 #include <windows.h>
 #include "NTFS_FS.h"
+#include "FileSystemChecker.h"
 
 
 int main()
 {
 	std::cout << "Surnin Mikhail RI-541215" << std::endl;
-	NTFS_FS fileSystem;
-	fileSystem.Open();
+	FileSystemChecker fileSystem;
+	HANDLE handle;
 	BYTE startBuffer[2048];
+	fileSystem.Open();
 	fileSystem.GetFirstSector(startBuffer);
-	fileSystem.CheckFileSystem(startBuffer);
+	handle = fileSystem.GetHandle();
+	AbstractClassFS * fs = fileSystem.CreateFileSystem(startBuffer, handle);
 	std::cout << "OEM Name: ";
-	std::cout << fileSystem.GetOEMName() << std::endl;
+	std::cout << fs -> GetOEMName() << std::endl;
 	std::cout << "Bytes Per Cluster: ";
-	std::cout << fileSystem.GetBytesPerCluster() << std::endl;
+	std::cout << fs -> GetBytesPerCluster() << std::endl;
 	std::cout << "Number of clusters: ";
-	std::cout << fileSystem.GetTotalClusters() << std::endl << std::endl << std::endl;
+	std::cout << fs -> GetTotalClusters() << std::endl << std::endl << std::endl;
 	
 
 	ULONGLONG stCluster;
@@ -26,10 +29,10 @@ int main()
 	std::cin >> stCluster;
 	std::cout << "Enter number of cluster: ";
 	std::cin >> number;
-	DWORD bufferSize = number * fileSystem.GetBytesPerCluster();
+	DWORD bufferSize = number * fs -> GetBytesPerCluster();
 	BYTE * databuffer = new BYTE[bufferSize];
 	std::cout << "Your data: " << std::endl;
-	fileSystem.ReadClusters(stCluster,number,databuffer);
+	fs -> ReadClusters(stCluster,number,databuffer);
 
 	system("pause");
 	return 0;
