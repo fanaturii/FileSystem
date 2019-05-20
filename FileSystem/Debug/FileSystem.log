@@ -1,7 +1,5 @@
-﻿  ExFAT_FS.cpp
-c:\users\mikes\desktop\filesystem\filesystem\filesystem\exfat_fs.cpp(11): warning C4244: =: преобразование "double" в "DWORD", возможна потеря данных
-c:\users\mikes\desktop\filesystem\filesystem\filesystem\exfat_fs.cpp(12): warning C4244: =: преобразование "double" в "DWORD", возможна потеря данных
-  FileSystem.cpp
-  FileSystemChecker.cpp
+﻿  ClusterIterator.cpp
+  FAT32_FS.cpp
+c:\users\mikes\desktop\filesystem\filesystem\filesystem\fat32_fs.cpp(14): warning C4244: =: преобразование "ULONGLONG" в "DWORD", возможна потеря данных
   Создание кода...
   FileSystem.vcxproj -> C:\Users\mikes\Desktop\FileSystem\FileSystem\Debug\FileSystem.exe

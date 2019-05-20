@@ -3,6 +3,7 @@
 #include <windows.h>
 #include "NTFS_FS.h"
 #include "FileSystemChecker.h"
+#include "ClusterIterator.h"
 
 
 int main()
@@ -23,16 +24,19 @@ int main()
 	std::cout << fs -> GetTotalClusters() << std::endl << std::endl << std::endl;
 	
 
-	ULONGLONG stCluster;
-	DWORD number;
-	std::cout << "Enter initial cluster: ";
-	std::cin >> stCluster;
-	std::cout << "Enter number of cluster: ";
-	std::cin >> number;
-	DWORD bufferSize = number * fs -> GetBytesPerCluster();
-	BYTE * databuffer = new BYTE[bufferSize];
-	std::cout << "Your data: " << std::endl;
-	fs -> ReadClusters(stCluster,number,databuffer);
+	//ULONGLONG stCluster;
+	//DWORD number;
+	//std::cout << "Enter initial cluster: ";
+	//std::cin >> stCluster;
+	//std::cout << "Enter number of cluster: ";
+	//std::cin >> number;
+	//DWORD bufferSize = number * fs -> GetBytesPerCluster();
+	//BYTE * databuffer = new BYTE[bufferSize];
+	//std::cout << "Your data: " << std::endl;
+	//fs -> ReadClusters(stCluster,number,databuffer);
+
+	ClusterIterator iterator = ClusterIterator(fs);
+	iterator.GetCurrent();
 
 	system("pause");
 	return 0;

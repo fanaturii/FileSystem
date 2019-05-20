@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AbstractClassFS.h" />
+    <ClInclude Include="ClusterIterator.h" />
     <ClInclude Include="ExFAT_FS.h" />
     <ClInclude Include="FAT32_FS.h" />
     <ClInclude Include="FileSystemChecker.h" />
@@ -160,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractClassFS.cpp" />
+    <ClCompile Include="ClusterIterator.cpp" />
     <ClCompile Include="ExFAT_FS.cpp" />
     <ClCompile Include="FAT32_FS.cpp" />
     <ClCompile Include="FileSystem.cpp" />

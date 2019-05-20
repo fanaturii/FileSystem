@@ -50,15 +50,26 @@ bool FAT32_FS::ReadClusters(ULONGLONG startCluster, DWORD numberOfClusters, BYTE
 
 	if (!readResult || bytesRead != bytesToRead) {
 		std::cout << "Error read bytes!" << std::endl;
-		exit(103);
+		exit(GetLastError());
 		return false;
 	}
 	else {
 		int i = 0;
 		while (i != bytesToRead) {
-			std::cout << std::hex << DWORD(*outBuffer) << " ";
+			if (int(*outBuffer) >= 0 and int(*outBuffer) <= 15 ) {
+				std::cout << '0';
+				std::cout << std::hex << DWORD(*outBuffer) << " ";
+			}
+			else {
+
+				std::cout << std::hex << DWORD(*outBuffer) << " ";
+			}
 			outBuffer++;
 			i++;
+			if (i % 16 == 0)
+			{
+				std::cout << std::endl;
+			}
 		}
 		return true;
 	}

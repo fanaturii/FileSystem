@@ -56,9 +56,20 @@ bool NTFS_FS::ReadClusters(ULONGLONG startCluster, DWORD numberOfClusters, BYTE 
 	else {
 		int i = 0;
 		while (i != bytesToRead) {
-			std::cout << std::hex << DWORD(*outBuffer) << " ";
+			if (int(*outBuffer) >= 0 and int(*outBuffer) <= 15) {
+				std::cout << '0';
+				std::cout << std::hex << DWORD(*outBuffer) << " ";
+			}
+			else {
+
+				std::cout << std::hex << DWORD(*outBuffer) << " ";
+			}
 			outBuffer++;
 			i++;
+			if (i % 16 == 0)
+			{
+				std::cout << std::endl;
+			}
 		}
 		return true;
 	}
