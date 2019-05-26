@@ -1,5 +1,2 @@
-﻿  ClusterIterator.cpp
-  FAT32_FS.cpp
-c:\users\mikes\desktop\filesystem\filesystem\filesystem\fat32_fs.cpp(14): warning C4244: =: преобразование "ULONGLONG" в "DWORD", возможна потеря данных
-  Создание кода...
+﻿  FileSystem.cpp
   FileSystem.vcxproj -> C:\Users\mikes\Desktop\FileSystem\FileSystem\Debug\FileSystem.exe

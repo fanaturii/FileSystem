@@ -52,28 +52,29 @@ bool ExFAT_FS::ReadClusters(ULONGLONG startCluster, DWORD numberOfClusters, BYTE
 	);
 
 	if (!readResult || bytesRead != bytesToRead) {
-		std::cout << "Error read bytes!" << std::endl;
-		exit(103);
 		return false;
 	}
-	else {
-		int i = 0;
-		while (i != bytesToRead) {
-			if (int(*outBuffer) >= 0 and int(*outBuffer) <= 15) {
-				std::cout << '0';
-				std::cout << std::hex << DWORD(*outBuffer) << " ";
-			}
-			else {
+	//else {
+	//	int i = 0;
+	//	while (i != bytesToRead) {
+	//		if (int(*outBuffer) >= 0 and int(*outBuffer) <= 15) {
+	//			std::cout << '0';
+	//			std::cout << std::hex << DWORD(*outBuffer) << " ";
+	//		}
+	//		else {
 
-				std::cout << std::hex << DWORD(*outBuffer) << " ";
-			}
-			outBuffer++;
-			i++;
-			if (i % 16 == 0)
-			{
-				std::cout << std::endl;
-			}
-		}
+	//			std::cout << std::hex << DWORD(*outBuffer) << " ";
+	//		}
+	//		outBuffer++;
+	//		i++;
+	//		if (i % 16 == 0)
+	//		{
+	//			std::cout << std::endl;
+	//		}
+	//	}
+	//	return true;
+	//}
+	else {
 		return true;
 	}
 }

@@ -4,10 +4,12 @@
 #include "NTFS_FS.h"
 #include "FileSystemChecker.h"
 #include "ClusterIterator.h"
+#include "DecoratorBMP.h"
 
 
 int main()
 {
+	//Вывод информации о файловой системе
 	std::cout << "Surnin Mikhail RI-541215" << std::endl;
 	FileSystemChecker fileSystem;
 	HANDLE handle;
@@ -35,8 +37,17 @@ int main()
 	//std::cout << "Your data: " << std::endl;
 	//fs -> ReadClusters(stCluster,number,databuffer);
 
+	//Считаем количество BMP файлов
 	ClusterIterator iterator = ClusterIterator(fs);
-	iterator.GetCurrent();
+	DecoratorBMP decorator = DecoratorBMP(&iterator);
+	decorator.First();
+	int counter = 0;
+	while (!decorator.IsDone())
+	{
+		counter++;
+		decorator.Next();
+	}
+	std::cout << "Count of BMP images: " << counter << std::endl;
 
 	system("pause");
 	return 0;

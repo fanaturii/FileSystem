@@ -2,6 +2,10 @@
 #include "ClusterIterator.h"
 
 
+ClusterIterator::ClusterIterator()
+{
+}
+
 ClusterIterator::ClusterIterator(AbstractClassFS *fs)
 {
 	this -> currentClusterPosition = 0;
@@ -37,8 +41,8 @@ bool ClusterIterator::IsDone()
 }
 
 BYTE * ClusterIterator::GetCurrent()
-{
-	BYTE * buffer = new BYTE[fs->GetBytesPerCluster()];
+{	
+	this->buffer = new BYTE[fs->GetBytesPerCluster()];
 	if (fs->ReadClusters(currentClusterPosition, 1, buffer)) {
 
 		return buffer;

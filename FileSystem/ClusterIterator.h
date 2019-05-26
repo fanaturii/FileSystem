@@ -7,8 +7,10 @@ class ClusterIterator
 protected:
 	ULONGLONG currentClusterPosition;
 	AbstractClassFS *fs;
+	BYTE * buffer;
 
 public:
+	ClusterIterator();
 	ClusterIterator(AbstractClassFS *fs);
 	~ClusterIterator();
 	void First();
